@@ -1,6 +1,10 @@
 <h1 align="center">
-  <b>Quadroid - AI-Assistant</b>
+  <b>Quadroid</b>
 </h1>
+
+<h2 align="center">
+  <b>The AI Assistant</b>
+</h2>
 
 ---
 
