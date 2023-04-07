@@ -1,0 +1,6 @@
+openai
+SpeechRecognition
+pyttsx3
+SpeechRecognition
+playsound
+pipwin
