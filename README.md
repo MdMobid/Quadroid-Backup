@@ -1,5 +1,5 @@
 <h1 align="center">
-  <b>AI-Assistant</b>
+  <b>Quadroid - AI-Assistant</b>
 </h1>
 
 ---
