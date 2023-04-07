@@ -12,7 +12,7 @@
 ---
 
 # Credits
-* [![Curious Squad](https://img.shields.io/static/v1?label=Curious-Squad&message=Devs&color=critical)
+* ![Curious Squad](https://img.shields.io/static/v1?label=Curious-Squad&message=Devs&color=critical)
 *
 *
 
