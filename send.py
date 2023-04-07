@@ -10,7 +10,7 @@ ll=[] #
 go=False # to check if weak up call is done
 c1=False #to allow first question after weak up call
 # Initialize OpenAI API
-openai.api_key = "OpenAI api key#####"
+openai.api_key = "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"
 # Initialize the text to speech engine 
 engine=pyttsx3.init()
 
