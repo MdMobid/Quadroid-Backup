@@ -10,13 +10,13 @@ ll=[] #
 go=False # to check if weak up call is done
 c1=False #to allow first question after weak up call
 # Initialize OpenAI API
-openai.api_key = "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"
+openai.api_key = "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"
 # Initialize the text to speech engine 
 engine=pyttsx3.init()
 
 
 
-mss=[{'role':'system','content':'your are a smart tech savvy mentor and your name is Dodo ,and are your created by kv number 1 saltlake curious squad'}]
+mss=[{'role':'system','content':'you are a smart ai assistant and your name is Dodo ,and you are created by KV Number 1 Saltlake Curious Squad'}]
 
 def generate_response(prompt):
     
