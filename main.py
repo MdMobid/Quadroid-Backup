@@ -10,7 +10,7 @@ ll=[] #
 go=False # to check if weak up call is done
 c1=False #to allow first question after weak up call
 # Initialize OpenAI API
-openai.api_key = "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"
+openai.api_key = "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"
 # Initialize the text to speech engine 
 engine=pyttsx3.init()
 
@@ -77,6 +77,7 @@ def main():
                  recognizer = sr.Recognizer()
                  source.pause_threshold = 20
                  audio = recognizer.listen(source, phrase_time_limit=None, timeout=None)
+
                  with open(filename, "wb") as f:
                      f.write(audio.get_wav_data())
                 audio_file= open("input.wav", "rb")
@@ -89,13 +90,54 @@ def main():
                     print('ttt')
                     continue
 
-                if text:
+                if "tell me some" and "news" in text.lower():
+                    topic_word = text.split(" ")[3]
+                    print(topic_word)
+                    import requests
+                    def get_news(topic):
+                          # Make a request to the news API and retrieve articles related to the topic
+                          url = f'https://newsapi.org/v2/everything?q={topic}&apiKey=c85f7fc043d3408980c30baa7aeadc25'
+                          response = requests.get(url)
+                          articles = response.json()['articles']
+                          return articles
+                    
+                    def extract_information(article):
+                          # Extract information from the article
+                          title = article['title']
+                          if 'description' in article:
+                               description = article['description']
+                          else:
+                               description = 'No description available.'
+                          return title, description
+                    
+                    def present_news(articles):
+                          # Create a string to store the news articles
+                          news_str = ''
+                          counter = 1
+                          for article in articles:
+                              title, description = extract_information(article)
+                              news_str += f'{counter}. {title}\n'
+                              news_str += f'{description}\n\n'
+                              counter += 1
+                              if counter == 4:
+                                  break
+                          return news_str
+
+                    topic = topic_word
+                    articles = get_news(topic)
+                    news_str = present_news(articles)
+                    print(news_str)
+                    speak_text(news_str)
+                    continue
+
+                else:
                     print("Got it..")
                     playsound("sound effect\\mixkit-retro-game-notification-212.wav")
                     tt1=time.time()
                     c1=False
                     print(f"You said: {text}")
                     tt=time.time()
+
 
                     # generate the response
                     response = generate_response(text)
