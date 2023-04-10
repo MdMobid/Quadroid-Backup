@@ -4,3 +4,4 @@ pyttsx3
 SpeechRecognition
 playsound==1.2.2
 pipwin
+PyAudio
