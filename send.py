@@ -10,13 +10,14 @@ ll=[] #
 go=False # to check if weak up call is done
 c1=False #to allow first question after weak up call
 # Initialize OpenAI API
-openai.api_key = "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"
+openai.api_key = "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"
 # Initialize the text to speech engine 
 engine=pyttsx3.init()
 
 
 
 mss=[{'role':'system','content':'your are a smart tech savvy mentor and your name is Dodo ,and are your created by kv number 1 saltlake curious squad'}]
+
 def generate_response(prompt):
     
     mss.append(
@@ -43,7 +44,7 @@ def main():
         if go ==False:
          if x ==0:
              print()
-            # playsound("sound effect\\mixkit-retro-game-notification-212.wav")
+             playsound("sound effect\\mixkit-retro-game-notification-212.wav")
          with sr.Microphone() as source:
             recognizer = sr.Recognizer()
             audio = recognizer.listen(source)
@@ -53,17 +54,18 @@ def main():
              
                  
              transcription = recognizer.recognize_google(audio)
-             
         
              if "hey" in transcription.lower() :  
-              #  playsound("sound effect\\the-notification-email-143029.mp3")
+                playsound("sound effect\\the-notification-email-143029.mp3")
                 go=True
                 c1=True
                 tt1=time.time() 
                 #time.sleep(2)
+                
             while go: 
-              #  playsound("sound effect\\interface-124464.mp3") 
-                print("say...")
+                playsound("sound effect\\interface-124464.mp3") 
+                print("Say Something...")
+                speak_text("Say Something")
                 c2=int(time.time()-tt1)
                 
                 if c2>20:
@@ -85,11 +87,11 @@ def main():
 
                 if text == "Thank you." :
                     print('ttt')
-                    continue        
+                    continue
 
                 if text:
-                    print("got it.................")
-                #    playsound("sound effect\\mixkit-retro-game-notification-212.wav")
+                    print("Got it..")
+                    playsound("sound effect\\mixkit-retro-game-notification-212.wav")
                     tt1=time.time()
                     c1=False
                     print(f"You said: {text}")
@@ -97,14 +99,16 @@ def main():
 
                     # generate the response
                     response = generate_response(text)
-                    print(f"assistent: {response}")
+                    print(f"Assistant: {response}")
                     print(tt-time.time())
 
 
                     # read response using GPT-3
                     speak_text(response)
-                    print("lissing .....")
+                    print("Listening...")
+
         except Exception as e:
+                speak_text("Didn't Got That, Please Try Again")
                 print("An error occurred: {}".format(e))
 
 if __name__=="__main__":
