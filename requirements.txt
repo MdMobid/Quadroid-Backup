@@ -2,5 +2,6 @@ openai
 SpeechRecognition
 pyttsx3
 SpeechRecognition
-playsound
+playsound==1.2.2
 pipwin
+PyAudio
