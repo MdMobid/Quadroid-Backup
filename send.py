@@ -8,22 +8,22 @@ GPIO.setup(pe,GPIO.OUT)
 GPIO.setup(rec,GPIO.OUT)
 GPIO.output(pe,0)
 GPIO.output(rec,0)
-def aufnahme():
+def record():
  sleep(3)
- print("Aufnahme startet")
+ print("recording start")
  GPIO.output(pe, 1)
  sleep(10)
  GPIO.output(pe, 0)
  sleep(5)
- print("Aufnahme beendet")
-def abspielen():
- print("Wiedergabe startet")
+ print("recording stop")
+def play():
+ print("play start")
  GPIO.output(rec, 1)
  sleep(1)
  GPIO.output(rec, 0)
  sleep(10)
- print("Wiedergabe beendet")
+ print("play stop")
 
 while True:
- aufnahme()
- abspielen()
+ record()
+ play()
