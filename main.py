@@ -164,8 +164,9 @@ def main():
 
 
                 if "open" or "close" in text.lower():
-                        topic_word = text.split(" ")[3]
-                        open( topic_word)
+                        query=query.lower()
+                        x=query.replace("open ","").strip()
+                        open(x)
                 else:
                     print("Got it..")
                     playsound("sound effect\\mixkit-retro-game-notification-212.wav")
