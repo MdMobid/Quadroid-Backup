@@ -9,14 +9,14 @@ x=0 #a fleg to check if control is out of assestent
 ll=[] #
 go=False # to check if weak up call is done
 c1=False #to allow first question after weak up call
+sleep=False
 # Initialize OpenAI API
-openai.api_key = "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"
+openai.api_key = "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"
 # Initialize the text to speech engine 
 engine=pyttsx3.init()
 
 
-
-mss=[{'role':'system','content':'you are a smart ai assistant and your name is Dodo ,and you are created by KV Number 1 Saltlake Curious Squad'}]
+mss=[{'role':'system','content':'you are a smart ai assistant and your name is Quadroid ,and you are created by KV Number 1 Saltlake Curious Squad, and you are to help humans day to day life'}]
 
 def generate_response(prompt):
     
@@ -39,6 +39,7 @@ def main():
     global go
     global c1
     global x
+    global sleep
     while True:
         tt=time.time()
         if go ==False:
@@ -51,8 +52,6 @@ def main():
             x=1
         try:
             if go == False:
-             
-                 
              transcription = recognizer.recognize_google(audio)
         
              if "hey" in transcription.lower() :  
@@ -68,14 +67,12 @@ def main():
                 speak_text("Say Something")
                 c2=int(time.time()-tt1)
                 
-                if c2>20:
-                    go=False
-                    x=0  
+                x=0  
                 filename = "input.wav"
                    
                 with sr.Microphone() as source:
                  recognizer = sr.Recognizer()
-                 source.pause_threshold = 20
+                 source.pause_threshold = 60
                  audio = recognizer.listen(source, phrase_time_limit=None, timeout=None)
 
                  with open(filename, "wb") as f:
@@ -92,7 +89,6 @@ def main():
 
                 if "tell me some" and "news" in text.lower():
                     topic_word = text.split(" ")[3]
-                    print(topic_word)
                     import requests
                     def get_news(topic):
                           # Make a request to the news API and retrieve articles related to the topic
@@ -130,6 +126,12 @@ def main():
                     speak_text(news_str)
                     continue
 
+                if "sleep" in text.lower():
+                    go=False
+                    sleep=True
+                    print("Going to Sleep..")
+                    speak_text("OK, Going to sleep, Call me When You Need Me")
+
                 else:
                     print("Got it..")
                     playsound("sound effect\\mixkit-retro-game-notification-212.wav")
@@ -150,8 +152,9 @@ def main():
                     print("Listening...")
 
         except Exception as e:
-                speak_text("Didn't Got That, Please Try Again")
-                print("An error occurred: {}".format(e))
+                if not sleep:
+                    speak_text("Didn't Got That, Please Try Again")
+                    print("An error occurred: {}".format(e))
 
 if __name__=="__main__":
     main()
