@@ -11,7 +11,7 @@ go=False # to check if weak up call is done
 c1=False #to allow first question after weak up call
 sleep=False
 # Initialize OpenAI API
-openai.api_key = "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"
+openai.api_key = "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"
 # Initialize the text to speech engine 
 engine=pyttsx3.init()
 
@@ -28,9 +28,36 @@ def generate_response(prompt):
     )
     reply = chat.choices[0].message.content
     mss.append({"role": "assistant", "content": reply})
-    
-
     return reply
+
+def openfunc(query):
+  print()
+
+  from webbrowser import open as ope
+  from AppOpener import open as op, close
+
+  query=query
+  x=query.replace("open ","").strip()
+    
+  if "in web" in query:
+    x=x.replace(" in web","").strip()
+    print("OPENING",x)
+    speak_text("OPENING",x,"in web")
+    ope(x)
+
+  elif "open" or "close" in query:
+      if "close " in query:
+        app_name = query.replace("close ","").strip()
+        print("OPENING",app_name)
+        speak_text("OPENING",app_name)
+        close(app_name, match_closest=True, output=False) # App will be close be it matches little bit too (Without printing context (like CLOSING <app_name>))
+  
+      elif "open " in query:
+        app_name = query.replace("open ","")
+        print("CLOSING",app_name)
+        speak_text("CLOSING",app_name)
+        op(app_name, match_closest=True) # App will be open be it matches little bit too
+    
 def speak_text(text):
     engine.say(text)
     engine.runAndWait()
@@ -131,6 +158,11 @@ def main():
                     sleep=True
                     print("Going to Sleep..")
                     speak_text("OK, Going to sleep, Call me When You Need Me")
+                
+                if "open" or "close" in text.lower():
+                    a=text.lower()
+                    openfunc(a)
+                    continue
 
                 else:
                     print("Got it..")
