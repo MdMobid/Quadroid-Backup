@@ -42,8 +42,7 @@ def open(query):
 
   while True:
     #query=input("What to open? ")
-    query=query.lower()
-    x=query.replace("open ","").strip()
+    query=query
     
     if "in web" in query:
       x=x.replace(" in web","").strip()
