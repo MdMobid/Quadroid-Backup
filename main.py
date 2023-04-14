@@ -6,12 +6,12 @@ from playsound import playsound
 
  
 x=0 #a fleg to check if control is out of assestent
-ll=[] #
+ll=[]
 go=False # to check if weak up call is done
 c1=False #to allow first question after weak up call
 sleep=False
 # Initialize OpenAI API
-openai.api_key = "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"
+openai.api_key = "OPENAI_API_KEY" #ENTER YOUR OPENAI_API_KEY HERE
 # Initialize the text to speech engine 
 engine=pyttsx3.init()
 
@@ -40,24 +40,25 @@ def openfunc(query):
   x=query.replace("open ","").strip()
     
   if "in web" in query:
-    x=x.replace(" in web","").strip()
-    print("OPENING",x)
-    speak_text("OPENING",x,"in web")
+    x=x.replace(" in web.","").strip()
+    text1 = f"OPENING {x} in web"
+    print(text1)
+    speak_text(text1)
     ope(x)
 
   elif "open" or "close" in query:
       if "close " in query:
         app_name = query.replace("close ","").strip()
-        print("OPENING",app_name)
-        speak_text("OPENING",app_name)
+        text2 = f"CLOSING {app_name}"
+        speak_text(text2)
         close(app_name, match_closest=True, output=False) # App will be close be it matches little bit too (Without printing context (like CLOSING <app_name>))
   
-      elif "open " in query:
+      if "open " in query:
         app_name = query.replace("open ","")
-        print("CLOSING",app_name)
-        speak_text("CLOSING",app_name)
+        text2 = f"OPENING {app_name}"
+        speak_text(text2)
         op(app_name, match_closest=True) # App will be open be it matches little bit too
-    
+   
 def speak_text(text):
     engine.say(text)
     engine.runAndWait()
